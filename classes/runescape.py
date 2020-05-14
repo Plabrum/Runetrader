@@ -2,7 +2,7 @@ import pyautogui
 import os
 import random
 import time
-import win32gui
+# import win32gui
 import json
 import config
 
@@ -14,20 +14,23 @@ from classes.inventory import  Inventory
 def find_window(name="RuneLite"):
     """ Returns handle and coordinates for a given window """
 
-    hwnd = win32gui.FindWindow(None, name)
-    coordinates = win32gui.GetWindowRect(hwnd)
-    print("DEBUG: Runescape client window, hwnd : {0}, coordinates : {1}".format(hwnd, coordinates))
-    return hwnd, coordinates
+    # hwnd = win32gui.FindWindow(None, name)
+    # coordinates = win32gui.GetWindowRect(hwnd)
+    # print("DEBUG: Runescape client window, hwnd : {0}, coordinates : {1}".format(hwnd, coordinates))
+
+    # this cant happen on mac
+    coordinates = (0,0,555,805)
+    return coordinates
 
 
 class RunescapeInstance:
     """ Instance of the Runescape window """
 
-    def __init__(self, hwnd, coordinates):
+    def __init__(self, coordinates):
 
         print("DEBUG: setting up runescape client instance")
 
-        self.hwnd = hwnd
+        # self.hwnd = hwnd
         self.coordinates = coordinates
 
         self.exchange = exchange.Exchange(self.coordinates)
@@ -40,8 +43,8 @@ class RunescapeInstance:
 
             self.inventory = Inventory(utils.dynamic_coordinate_converter(self.coordinates,
                                                                           coords['inventory_window'], '+'))
-        self.inventory.inventory_list[0].set(items.Item('coins'), self.find_coins())
-        print("DEBUG: Coins in inventory", self.inventory.inventory_list[0].amount)
+            self.inventory.inventory_list[0].set(items.Item('coins'), self.find_coins())
+            print("DEBUG: Coins in inventory", self.inventory.inventory_list[0].amount)
 
     def find_coins(self):
         print("DEBUG: Finding coins in inventory spot 0")

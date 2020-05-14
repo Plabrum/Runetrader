@@ -6,8 +6,8 @@ import time
 
 
 def first_run():
-    hwnd, coordinates = runescape.find_window()
-    client = runescape.RunescapeInstance(hwnd, coordinates)
+    coordinates = runescape.find_window()
+    client = runescape.RunescapeInstance(coordinates)
 
     """ Ignore this mess, its a hardcoded image detection based automation script to place an infeasable order,
     and thus be able to collect coordinate data about every button that comes up  """

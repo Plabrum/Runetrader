@@ -9,12 +9,15 @@ if __name__ == "__main__":
     """ Start Runetrader"""
 
     if not os.path.exists("./data/dynamic_coordinates.json"):
+        print("doing first run")
         builder.first_run()
 
     # Find and instantiate client and objects
 
-    hwnd, coordinates = runescape.find_window()
-    client = runescape.RunescapeInstance(hwnd, coordinates)
+    print("finding window")
+    coordinates = runescape.find_window()
+    print(f"coords are: {coordinates}")
+    client = runescape.RunescapeInstance(coordinates)
 
     while True:
         """ Main event loop """
